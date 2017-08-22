@@ -2,7 +2,7 @@
  * @Author: mingru 
  * @Date: 2017-08-04 11:42:14 
  * @Last Modified by: mingru
- * @Last Modified time: 2017-08-08 14:39:54
+ * @Last Modified time: 2017-08-16 10:51:58
  */
 
 <template>
@@ -13,7 +13,7 @@
           <div class="my-blogs-wrap">
             <blogcomment />
             <div class="my-blogs-item" v-for="(item, index) in blogsData">
-              <div class="blog-item-header cursor">后浪推前浪</div>
+              <div class="blog-item-header cursor" @click="goToBlogItem">后浪推前浪</div>
               <div class="blog-item-pre">好无聊啊，加油搞起来</div>
               <div class="post-time">Posted by mingrutough on July 12, 2017</div>
             </div>
@@ -25,23 +25,23 @@
               <div class="circle-wrap center-block">
                 <img src="../../assets/mingru.jpg" alt="">
               </div>
-              <h4>夏明儒</h4>
+              <div class="h4">夏明儒</div>
               <div class="location ">
                 <span class="glyphicon glyphicon-map-marker"></span>上海
               </div>
             </div>
             <div class="nums-wrap">
               <div class="posts">
-                <h5>88</h5>
-                <h5 class="des">Posts</h5>
+                <div class="h5">88</div>
+                <div class="des h5">Posts</div>
               </div>
               <div class="tags">
-                <h5>88</h5>
-                <h5 class="des">Tags</h5>
+                <div class="h5">88</div>
+                <div class="des h5">Tags</div>
               </div>
             </div>
             <div class="tags-item-container ">
-              <h4>Tags</h4>
+              <div class="h4">Tags</div>
               <div class="item-wrap">
                 <div class="tags-item" v-for="(item, index) in tagsData" @click="selectTags(index)" :class="{'choosen': index === tagChoosen}">
                   {{item}}
@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="readings-item-containner">
-              <h4>Recently Reading</h4>
+              <div class="h4">Recently Reading</div>
               <div class="readings-item" v-for="(item, index) in readingsData" @click="selectReadings(index+tagsData.length)" :class="{'choosen': (index+tagsData.length)=== tagChoosen}">
                 <span class="readings-name">{{item.name}}</span>
                 <span class="badge">{{item.nums}}</span>
@@ -128,6 +128,9 @@ export default {
     selectReadings(index) {
       this.tagChoosen = index;
     },
+    goToBlogItem() {
+      this.$router.push('/blog/1');
+    },
   },
 };
 </script>
@@ -186,7 +189,7 @@ export default {
           border-radius: 50%;
         }
       }
-      h4 {
+      .h4 {
         text-align: center;
       }
       .location {
@@ -197,7 +200,7 @@ export default {
       height: 60px;
       display: flex;
       border-bottom: 1px solid rgba(5, 5, 5, 0.1);
-      h5 {
+      .h5 {
         text-align: center;
       }
       .posts {
@@ -211,7 +214,7 @@ export default {
     .tags-item-container {
       padding-bottom: 20px;
       border-bottom: 1px solid rgba(5, 5, 5, 0.1);
-      h4 {
+      .h4 {
         text-align: center;
       }
       .item-wrap {
@@ -244,7 +247,7 @@ export default {
     .readings-item-containner {
       padding: 0px 20px;
       padding-bottom: 20px;
-      h4 {
+      .h4 {
         text-align: center;
       }
       .readings-item {

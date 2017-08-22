@@ -2,7 +2,7 @@
  * @Author: mingru 
  * @Date: 2017-08-04 16:24:56 
  * @Last Modified by: mingru
- * @Last Modified time: 2017-08-08 16:02:45
+ * @Last Modified time: 2017-08-16 16:28:37
  */
 <template>
     <div class="home">
@@ -22,12 +22,12 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse " aria-expanded="false">
                     <ul class="nav navbar-nav visible-xs-block">
-                        <li :class="{active: index === defalutIndex}" v-for="(item, index) in menuData" @click="menuChange(item.path, index)">
+                        <li :class="{active: item.path === routerPath}" v-for="(item, index) in menuData" @click="menuChange(item.path, index)">
                             <a role="button" data-toggle="collapse" href="#navbar">{{item.name}}</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav hidden-xs">
-                        <li :class="{active: index === defalutIndex}" v-for="(item, index) in menuData" @click="menuChange(item.path, index)">
+                        <li :class="{active: item.path === routerPath}" v-for="(item, index) in menuData" @click="menuChange(item.path, index)">
                             <a href="javascript:void(0);">{{item.name}}</a>
                         </li>
                         <li class="direct-to-manage">
@@ -37,20 +37,20 @@
                         </li>
                     </ul>
                     <!--<form class="navbar-form navbar-right">
-                                                                            <div class="form-group">
-                                                                                <input type="text" placeholder="Email" class="form-control">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <input type="password" placeholder="Password" class="form-control">
-                                                                            </div>
-                                                                            <button type="submit" class="btn btn-success">Sign in</button>
-                                                                        </form>-->
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Email" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Password" class="form-control">
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Sign in</button>
+                                        </form>-->
                 </div>
                 <!-- /.nav-collapse -->
             </div>
             <!-- /.container -->
         </nav>
-        <div>
+        <div class="blog-pages-containner">
             <transition name="fade">
                 <router-view></router-view>
             </transition>
@@ -65,31 +65,37 @@
 
 <script>
 export default {
-  name: 'home',
-  data() {
-    return {
-      menuData: [
-        { name: 'Home', path: '/home' },
-        { name: 'About', path: '/about-me' },
-        { name: 'Tags', path: '/tags' },
-        { name: 'Useful Articles', path: '/useful-articles' },
-        // { name: 'Poppin', path: '/about-poppin' },           
-      ],
-      defalutIndex: 0,
-      defalutPath: '/home',
-    };
-  },
-  methods: {
-    menuChange(path1, index) {
-        this.defalutIndex = index;
-        this.$router.push({ path: path1 });
+    name: 'home',
+    data() {
+        return {
+            menuData: [
+                { name: 'Home', path: '/home' },
+                { name: 'About', path: '/about-me' },
+                { name: 'Tags', path: '/tags' },
+                { name: 'Useful Articles', path: '/useful-articles' },
+                // { name: 'Poppin', path: '/about-poppin' },           
+            ],
+
+            defalutPath: '/home',
+        };
     },
-    openNewWindow() {
-        // const domain = document.domain;
-        // console.log(domain);
-        window.open('/manage');
+    methods: {
+        menuChange(path1, index) {
+            this.defalutIndex = index;
+            this.$router.push({ path: path1 });
+            // console.log('path', this.$route.path);
+        },
+        openNewWindow() {
+            // const domain = document.domain;
+            // console.log(domain);
+            window.open('/manage');
+        },
     },
-  },
+    computed: {
+        routerPath() {
+            return `/${this.$route.path.split('/')[1]}`;
+        },
+    },
 };
 </script>
 
@@ -102,6 +108,9 @@ export default {
         position: absolute;
         right: 0;
     }
+    .blog-pages-containner{
+        min-height: 90vh;
+    } 
     .blog-footer {
         padding: 40px 0;
         color: #999;

@@ -40,5 +40,6 @@ module.exports = {
     'prefer-arrow-callback': 0,
     'no-unused-vars': 0,
     'indent': 0,
+    'import/prefer-default-export': 0,
   }
 }
