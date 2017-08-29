@@ -9,7 +9,7 @@ const options = {
     // callbackUrl: 'http://api.example.com/qiniu/upload/callback',
     // callbackBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
     // callbackBodyType: 'application/json'
-}
+};
 
 const uploadToken = function () { 
     return new qiniu.rs.PutPolicy(options).uploadToken(mac);

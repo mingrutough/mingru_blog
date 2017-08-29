@@ -34,4 +34,10 @@ export default {
     }
     return axios.post(url, tempOpt);
   },
+  put(url, opt) { 
+    return axios.put(url, opt);
+  },
+  delete(url, opt) { 
+    return axios.delete(url, opt);
+  },
 };

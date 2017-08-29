@@ -1,6 +1,6 @@
 build/*.js
 config/*.js
 src/main.js
-server/*.js
+server/
 src/mock
 src/quill-moudle

@@ -11,43 +11,34 @@ db.once('open', function() {
 
 // 单个文章
 const blogSchema = new Schema({
-    success: Boolean,
-    data: {
-        title: String,
-        publish_date: String,
-        tags:[
-            {
-                tag_id: String,
-                name: String,
-            }
-        ],
-        description: String,
-        content: String,
-        blog_id: String,       
-    },
 
+    title: String,
+    publish_date: String,
+    author: String,
+    tags:[
+        {
+            name: String 
+        }
+    ],
+    description: String,
+    content: String    
 });
 
 // 标签
-const tagsSchema = new Schema({
-    success: Boolean,
-    totalNumber: Number,
-    data: [
+const tagSchema = new Schema({
+
+    blogs: [
         {
-            tag_id: String,
-            blogs: [
-                {
-                   blog_id: String, 
-                }
-            ],
-            name: String,
+            blog_id: String 
         }
-    ],   
+    ],
+    name: String 
+        
 });
 
 const models = {
     Blog: mongoose.model('Blog', blogSchema),
-    Tags: mongoose.model('Tags', tagsSchema),
+    Tag: mongoose.model('Tag', tagSchema),
 };
 
 module.exports = models;

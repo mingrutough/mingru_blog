@@ -2,7 +2,7 @@
  * @Author: mingru 
  * @Date: 2017-08-04 16:24:56 
  * @Last Modified by: mingru
- * @Last Modified time: 2017-08-16 16:28:37
+ * @Last Modified time: 2017-08-29 10:02:26
  */
 <template>
     <div class="home">
@@ -37,21 +37,21 @@
                         </li>
                     </ul>
                     <!--<form class="navbar-form navbar-right">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Email" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" placeholder="Password" class="form-control">
-                                            </div>
-                                            <button type="submit" class="btn btn-success">Sign in</button>
-                                        </form>-->
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Email" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" placeholder="Password" class="form-control">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Sign in</button>
+                                            </form>-->
                 </div>
                 <!-- /.nav-collapse -->
             </div>
             <!-- /.container -->
         </nav>
         <div class="blog-pages-containner">
-            <transition name="fade">
+            <transition name="">
                 <router-view></router-view>
             </transition>
         </div>
@@ -108,9 +108,9 @@ export default {
         position: absolute;
         right: 0;
     }
-    .blog-pages-containner{
+    .blog-pages-containner {
         min-height: 90vh;
-    } 
+    }
     .blog-footer {
         padding: 40px 0;
         color: #999;

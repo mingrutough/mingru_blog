@@ -7,7 +7,7 @@
             </Col>
             <Col span="20" style="height:90vh; overflow:scroll;">
                 <BreadCrumb></BreadCrumb>
-                <transition name="fade">
+                <transition name="">
                     <keep-alive include="new-blog">
                         <router-view></router-view>
                     </keep-alive>

@@ -11,14 +11,6 @@
                     <Menu-item name="new-blog">发表文章</Menu-item>
                     <Menu-item name="blog-list">已发表文章</Menu-item>
                 </Submenu>
-                <Submenu name="tag">
-                    <template slot="title">
-                        <Icon type="pricetags"></Icon>
-                        标签管理
-                    </template>
-                    <Menu-item name="new-tag">新建标签</Menu-item>
-                    <Menu-item name="tag-list">已建标签</Menu-item>
-                </Submenu>
                 <Submenu name="article">
                     <template slot="title">
                         <Icon type="link"></Icon>
@@ -27,6 +19,7 @@
                     <Menu-item name="new-article">新建外链</Menu-item>
                     <Menu-item name="article-list">已建外链</Menu-item>
                 </Submenu>
+                <Menu-item name="new-tag"><Icon type="pricetags"></Icon>标签管理</Menu-item>
                 <Menu-item name="setting">个人设置</Menu-item>      
                 <Menu-item name="comment">评论管理</Menu-item>                                        
             </Menu>

@@ -3,9 +3,9 @@
     <div class="edit-title">
       <div class="publish-time-wrap">
         发布时间:
-        <Date-picker type="date" @on-change="handleTimeChange" placeholder="选择日期" style="width: 200px;margin-left:10px;margin-right:50px"></Date-picker>
+        <Date-picker type="date" @on-change="handleTimeChange" v-model="publishTime" placeholder="选择日期" style="width: 200px;margin-left:10px;margin-right:50px"></Date-picker>
         添加标签:
-        <Select v-model="blogTag" multiple filterable @on-change="handleTagsChange" style="width:400px;margin-left:10px;margin-right:50px">
+        <Select v-model="blogTag" multiple filterable @on-change="handleTagsChange" style="width:300px;margin-left:10px;margin-right:50px">
           <Option v-for="item in blogTagList" :value="item.value" :key="item.value">{{ item.value }}</Option>
         </Select>
       </div>
@@ -17,7 +17,7 @@
         文章描述:
         <Input v-model="blogDescribe" placeholder="请输入..." style="width: 90%;margin-left:10px;"></Input>
       </div>
-      <ImgUpload></ImgUpload>
+      <ImgUpload :resetImg="resetImg"></ImgUpload>
     </div>
     <div class="markDownEditor-wrap">
       <markdown-editor  v-model="content" :configs="configs" ref="markdownEditor"></markdown-editor>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       content: '', // 文章内容
+      resetImg: false, // 重置上传图片的内容
       configs: {
         // status: false, // 禁用底部状态栏
         initialValue: '开始你的博客之旅吧', // 设置初始值
@@ -46,20 +47,7 @@ export default {
       publishTime: '', // 文章发布时间
       blogTag: [], // 文章标签
       picUrl: '', // 图片的地址
-      blogTagList: [
-        {
-          value: 'JavaScript',
-        },
-        {
-          value: 'NodeJs',
-        },
-        {
-          value: 'MongoDB',
-        },
-        {
-          value: 'Http',
-        },
-      ], // 已发布文章标签
+      blogTagList: [], // 已发布文章标签
       blogTitle: '', // 文章标题
       blogDescribe: '', // 文章描述
     };
@@ -75,12 +63,24 @@ export default {
   methods: {
     handleTimeChange(curTime) {
       this.publishTime = curTime;
-      // console.log('发布时间', typeof this.publishTime);
+      // console.log('发布时间', this.publishTime);
     },
     handleTagsChange() {
       // console.log('发布时间', this.blogTag);
     },
-    pubishBlog() {
+    resetData() {
+      const self = this;
+      this.content = '开始你的博客之旅吧';
+      this.publishTime = '';
+      this.blogTag = [];
+      this.blogTitle = '';
+      this.blogDescribe = '';
+      this.resetImg = true;
+      setTimeout(() => {
+        self.resetImg = false;
+      }, 100);
+    },
+    pubishBlog() {    
       const self = this;     
       this.ajax.post('/api/blog', {
         content: self.contentHtml,
@@ -89,14 +89,28 @@ export default {
         blogDescribe: self.blogDescribe,
         blogTag: self.blogTag,
       }).then((res) => {
-
+        if (res.data.success) {
+          self.$Message.success('发布成功');
+          self.resetData();         
+        } else {
+          self.$Message.error('发布失败');  
+        }       
       });
     },
   },
   created() {
-    // axios.get('/api/tags').then((res) => {
-    //   console.log(res);
-    // });
+    const self = this;
+    this.ajax.get('/api/tags').then((res) => {
+      if (res.data.success) {
+        res.data.data.forEach((item) => {
+          self.blogTagList.push({
+            value: item.name,
+          });
+        });
+      } else {
+        self.$Message.error('获取标签失败');
+      }
+    });
   },
 };
 </script>

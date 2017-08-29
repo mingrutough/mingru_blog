@@ -1,7 +1,7 @@
 <template>
     <div class="manage-head">
         <div class="title-wrap">
-            <span class="title">Mingru‘s Blog 后台管理系统</span>
+            <span class="title" style="cursor:pointer" @click="toHome">Mingru‘s Blog 后台管理系统</span>
             <Icon type="heart" />
         </div>
         <div class="admin-info">
@@ -25,6 +25,11 @@
 <script>
 export default {
   name: 'manage-head',
+  methods: {
+    toHome() {
+        this.$router.push('/home');
+    },
+  },
 };
 </script>
 

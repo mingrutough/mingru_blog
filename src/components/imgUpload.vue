@@ -41,7 +41,7 @@
                         </Form-item>
                     </Form>
             </div>
-            <Tooltip placement="top" content="单击图片将图片地址复制到剪切板" :always="true">
+            <Tooltip placement="top" content="单击图片将图片地址复制到剪切板">
                 <img :src="imgUrl" v-if="visible" style="width: 100%" @click="pasteImgUrl">
             </Tooltip>
         </Modal>
@@ -62,6 +62,16 @@ export default {
                     token: '',
                 },
             };
+        },
+        props: [
+            'resetImg',
+        ],
+        watch: {
+            resetImg() {
+                if (this.resetImg) {
+                    this.uploadList = [];
+                }
+            },
         },
         methods: {
             handleView(url) {

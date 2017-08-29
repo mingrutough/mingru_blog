@@ -41,5 +41,6 @@ module.exports = {
     'no-unused-vars': 0,
     'indent': 0,
     'import/prefer-default-export': 0,
+    'dot-notation': 0,
   }
 }
